@@ -16,7 +16,7 @@ export class AddToDo extends Component {
   addToDo = e => {
     e.preventDefault();
     if (this.state.title.length > 3) {
-      this.props.addToDO(this.state.title);
+      this.props.addToDo(this.state.title);
       this.setState({
         title: '',
       });

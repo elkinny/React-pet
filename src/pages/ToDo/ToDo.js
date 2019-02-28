@@ -10,46 +10,33 @@ export class ToDo extends Component {
       .toString(36)
       .substr(2, 9);
 
-  state = {
-    toDoItems: [],
-  };
-
-  DbLink = 'https://my-json-server.typicode.com/elkinny/db/toDo';
-
-  componentDidMount() {
-    axios.get(this.DbLink).then(res =>
-      this.setState({
-        toDoItems: res.data,
-      })
-    );
-  }
-
   toggleToDo = id => {
-    this.setState({
-      toDoItems: this.state.toDoItems.map(toDoItem => {
-        if (toDoItem.id === id) toDoItem.completed = !toDoItem.completed;
-        return toDoItem;
-      }),
+    const toDoItems = this.props.toDoItems.map(toDoItem => {
+      if (toDoItem.id === id) toDoItem.completed = !toDoItem.completed;
+      return toDoItem;
     });
+
+    this.props.changeState({ toDoItems })
   };
 
   deleteToDo = id => {
-    axios.delete(`${this.DbLink}/${id}`).then(res =>
-      this.setState({
-        toDoItems: this.state.toDoItems.filter(toDoItem => toDoItem.id !== id),
+    console.log(this.props.DbLink)
+    axios.delete(`${this.props.DbLink}/${id}`).then(res =>
+      this.props.changeState({
+        toDoItems: this.props.toDoItems.filter(toDoItem => toDoItem.id !== id),
       })
     );
   };
 
-  addToDO = title => {
+  addToDo = title => {
     const newToDo = {
       id: this._generateId(),
       title,
       completed: false,
     };
-    axios.post(this.DbLink, newToDo).then(res => {
-      this.setState({
-        toDoItems: [...this.state.toDoItems, res.data],
+    axios.post(this.props.DbLink, newToDo).then(res => {
+      this.props.changeState({
+        toDoItems: [...this.props.toDoItems, res.data],
       });
     });
   };
@@ -57,9 +44,9 @@ export class ToDo extends Component {
   render() {
     return (
       <React.Fragment>
-        <AddToDo addToDO={this.addToDO} />
+        <AddToDo addToDo={this.addToDo} />
         <ToDoList
-          toDoItems={this.state.toDoItems}
+          toDoItems={this.props.toDoItems}
           toggleToDo={this.toggleToDo}
           deleteToDo={this.deleteToDo}
         />
