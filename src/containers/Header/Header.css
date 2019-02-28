@@ -12,6 +12,13 @@ header h1 {
   text-transform: uppercase;
 }
 
+nav{
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center
+}
+
 .link {
   display: inline-block;
   vertical-align: top;
