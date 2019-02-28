@@ -1,40 +1,46 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import './ToDoItem.css';
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
 
 export class ToDoItem extends Component {
   getStyle = () => {
     return this.props.toDoItem.completed ? 'completed' : '';
-  }
+  };
 
   toggleToDo = () => {
     this.props.toggleToDo(this.props.toDoItem.id);
-  }
-  
+  };
+
+  deleteToDo = () => {
+    this.props.deleteToDo(this.props.toDoItem.id);
+  };
+
   render() {
     const { id, title } = this.props.toDoItem;
+
     return (
-      <div className={ `to-do__item ${this.getStyle()}` }>
-        <input
-          type="checkbox"
-          checked = {this.props.toDoItem.completed}
-          onChange = { this.toggleToDo }
-          id = { id }
-        />
-        <label
-          className='to-do__title'
-          htmlFor={ id }
-        >
-          { title }
+      <li>
+        <label htmlFor={id}>
+          <input
+            type="checkbox"
+            id={id}
+            checked={this.props.toDoItem.completed}
+            onChange={this.toggleToDo}
+          />
+          <i />
+          <span>{title}</span>
+          <button onClick={this.deleteToDo}>–</button>
         </label>
-      </div>
-    )
+      </li>
+    );
   }
 }
 
 // PropTypes
 ToDoItem.propTypes = {
   toDoItem: PropTypes.object.isRequired,
-}
+  toggleToDo: PropTypes.func.isRequired,
+  deleteToDo: PropTypes.func.isRequired,
+};
 
-export default ToDoItem
+export default ToDoItem;

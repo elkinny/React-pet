@@ -1,45 +1,32 @@
 import React, { Component } from 'react';
 import './App.css';
-import ToDoList from './components/ToDoList/ToDoList';
+
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+
+import Header from './containers/Header/Header';
+import About from './pages/About/About';
+import ToDo from './pages/ToDo/ToDo';
 
 class App extends Component {
   state = {
-    toDoItems: [
-      {
-        id: 1,
-        title: 'Hello world',
-        completed: true,
-      },
-      {
-        id: 2,
-        title: 'Hello world.1',
-        completed: false,
-      },
-      {
-        id: 3,
-        title: 'Hello world.2',
-        completed: false,
-      },
-    ]
-  }
+    toDoItems: [],
+  };
 
-  toggleToDo = (id) => {
-    this.setState( {  
-      toDoItems: this.state.toDoItems.map((toDoItem) => {
-        if(toDoItem.id === id) toDoItem.completed = !toDoItem.completed;
-        return toDoItem;
-      }) 
-    });
-  }
+  changeState = newState => {
+    this.setState(newState);
+  };
 
   render() {
     return (
-      <div className="App">
-        <ToDoList 
-          toDoItems = { this.state.toDoItems }
-          toggleToDo = { this.toggleToDo }
-        />
-      </div>
+      <Router>
+        <div className="App">
+          <div className="container">
+            <Header />
+            <Route exact path="/" component={ToDo} changeState={this.changeState} />
+            <Route path="/about" component={About} />
+          </div>
+        </div>
+      </Router>
     );
   }
 }
