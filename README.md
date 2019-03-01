@@ -1,3 +1,6 @@
+<h1 align="center"><a href="http://elkinny.github.io/react-pet">Try it now</a></h1>
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
