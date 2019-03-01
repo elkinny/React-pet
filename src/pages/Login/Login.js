@@ -51,6 +51,7 @@ export default class Login extends Component {
             prevStep={this.prevStep}
             values={values}
             changeState={this.props.changeState}
+            clearUserData={this.props.clearUserData}
           />
         );
     }

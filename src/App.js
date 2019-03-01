@@ -38,6 +38,19 @@ class App extends Component {
     this.setState(newState);
   };
 
+  clearUserData = () => {
+    this.setState({
+      userData: {
+        step: 1,
+        username: '',
+        password: '',
+        firstName: '',
+        lastName: '',
+        email: '',
+      },
+    });
+  };
+
   render() {
     const { username, password } = this.state.userData;
     const isLoggedIn = username && password;
@@ -45,7 +58,10 @@ class App extends Component {
       <Router>
         <div className="App">
           <div className="container">
-            <Header isLoggedIn={isLoggedIn} />
+            <Header
+              isLoggedIn={isLoggedIn}
+              clearUserData={this.clearUserData}
+            />
 
             <Route
               exact
@@ -63,7 +79,7 @@ class App extends Component {
               }}
             />
 
-            <Route path="/about" component={About} />
+            <Route path="./about" component={About} />
 
             <Route
               exact

@@ -1,13 +1,28 @@
 import React, { Component } from 'react';
 import './Header.css';
 import { Link } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 
 export default class Header extends Component {
+  logout = history => {
+    this.props.clearUserData();
+    history.push('/login');
+  };
+
   render() {
     const logButton = this.props.isLoggedIn ? (
-      <a href="/" className="link">
-        Log out
-      </a>
+      <Route
+        render={({ history }) => (
+          <button
+            className="link"
+            onClick={() => {
+              this.logout(history);
+            }}
+          >
+            Logout
+          </button>
+        )}
+      />
     ) : (
       <Link to="/login" className="link">
         Log in

@@ -20,6 +20,7 @@ header nav {
 }
 
 header .link {
+  background: transparent;
   display: inline-block;
   vertical-align: top;
   width: 100px;
