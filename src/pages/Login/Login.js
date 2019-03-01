@@ -52,9 +52,10 @@ export default class Login extends Component {
             values={values}
             changeState={this.props.changeState}
             clearUserData={this.props.clearUserData}
-            basename={this.props.basename}
           />
         );
+      default:
+        break;
     }
   }
 

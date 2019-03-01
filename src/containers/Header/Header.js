@@ -12,7 +12,6 @@ export default class Header extends Component {
   render() {
     const logButton = this.props.isLoggedIn ? (
       <Route
-        basename={this.props.basename}
         render={({ history }) => (
           <button
             className="link"

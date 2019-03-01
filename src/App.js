@@ -57,18 +57,16 @@ class App extends Component {
     const { username, password } = this.state.userData;
     const isLoggedIn = username && password;
     return (
-      <Router>
+      <Router basename={this.basename}>
         <div className="App">
           <div className="container">
             <Header
               isLoggedIn={isLoggedIn}
               clearUserData={this.clearUserData}
-              basename={this.basename}
             />
 
             <Route
               exact
-              basename={this.basename}
               path="/todo"
               render={() => {
                 return isLoggedIn ? (
@@ -83,11 +81,10 @@ class App extends Component {
               }}
             />
 
-            <Route basename={this.basename} path="./about" component={About} />
+            <Route path="/about" component={About} />
 
             <Route
               exact
-              basename={this.basename}
               path="/login"
               render={() =>
                 isLoggedIn ? (
@@ -96,7 +93,6 @@ class App extends Component {
                   <Login
                     changeState={this.changeState}
                     userData={this.state.userData}
-                    basename={this.basename}
                   />
                 )
               }
@@ -104,7 +100,6 @@ class App extends Component {
 
             <Route
               exact
-              basename={this.basename}
               path="/"
               render={() =>
                 isLoggedIn ? <Redirect to="/todo" /> : <Redirect to="/login" />

@@ -51,7 +51,6 @@ export default class Confirmation extends Component {
         <div className="buttons-block">
           <button onClick={this.props.prevStep}>Back</button>
           <Route
-            basename={this.props.basename}
             render={({ history }) => (
               <button
                 onClick={() => {
