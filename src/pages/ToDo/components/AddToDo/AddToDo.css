@@ -1,9 +1,9 @@
-form {
+.addTodo {
   display: flex;
   width: 100%;
 }
 
-input[type='text'] {
+.addTodo input[type='text'] {
   background-color: #171d37;
   border: none;
   box-shadow: inset 0 0 8px 0 #0e1329;
@@ -18,15 +18,15 @@ input[type='text'] {
   transition: all 0.2s linear;
 }
 
-input[type='text']:hover {
+.addTodo input[type='text']:hover {
   color: #4c577f;
 }
 
-input[type='text']:focus {
+.addTodo input[type='text']:focus {
   color: #b1b2c9;
 }
 
-input[type='submit'] {
+.addTodo input[type='submit'] {
   background-color: #171d37;
   border: none;
   box-shadow: inset 0 0 8px 0 #0e1329;
@@ -40,19 +40,19 @@ input[type='submit'] {
   transition: all 0.2s linear;
 }
 
-input[type='submit']:hover {
+.addTodo input[type='submit']:hover {
   color: #5e6a99;
 }
 
-::-webkit-input-placeholder {
+.addTodo ::-webkit-input-placeholder {
   color: #464f72;
 } /* WebKit browsers */
-:-moz-placeholder {
+.addTodo :-moz-placeholder {
   color: #464f72;
 } /* Mozilla Firefox 4 to 18 */
-::-moz-placeholder {
+.addTodo ::-moz-placeholder {
   color: #464f72;
 } /* Mozilla Firefox 19+ */
-:-ms-input-placeholder {
+.addTodo :-ms-input-placeholder {
   color: #464f72;
 } /* Internet Explorer 10+ */

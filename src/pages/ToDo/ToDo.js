@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import AddToDo from './../../components/AddToDo/AddToDo';
-import ToDoList from './../../components/ToDoList/ToDoList';
+import AddToDo from './components/AddToDo/AddToDo';
+import ToDoList from './components/ToDoList/ToDoList';
 import axios from 'axios';
 
 export class ToDo extends Component {
@@ -16,16 +16,26 @@ export class ToDo extends Component {
       return toDoItem;
     });
 
-    this.props.changeState({ toDoItems })
+    this.props.changeState({ toDoItems });
   };
 
   deleteToDo = id => {
-    console.log(this.props.DbLink)
-    axios.delete(`${this.props.DbLink}/${id}`).then(res =>
-      this.props.changeState({
-        toDoItems: this.props.toDoItems.filter(toDoItem => toDoItem.id !== id),
-      })
-    );
+    axios
+      .delete(`${this.props.DbLink}/${id}`)
+      .then(res =>
+        this.props.changeState({
+          toDoItems: this.props.toDoItems.filter(
+            toDoItem => toDoItem.id !== id
+          ),
+        })
+      )
+      .catch(err =>
+        this.props.changeState({
+          toDoItems: this.props.toDoItems.filter(
+            toDoItem => toDoItem.id !== id
+          ),
+        })
+      );
   };
 
   addToDo = title => {

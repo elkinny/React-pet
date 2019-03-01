@@ -25,7 +25,7 @@ export class AddToDo extends Component {
 
   render() {
     return (
-      <form onSubmit={this.addToDo}>
+      <form onSubmit={this.addToDo} className="addTodo">
         <input
           type="text"
           name="title"
