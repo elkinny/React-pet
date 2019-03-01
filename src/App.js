@@ -26,6 +26,8 @@ class App extends Component {
 
   DbLink = 'https://my-json-server.typicode.com/elkinny/db/toDo';
 
+  basename = process.env.NODE_ENV === 'development' ? '' : '/react-pet';
+
   componentDidMount() {
     axios.get(this.DbLink).then(res =>
       this.setState({
@@ -61,10 +63,12 @@ class App extends Component {
             <Header
               isLoggedIn={isLoggedIn}
               clearUserData={this.clearUserData}
+              basename={this.basename}
             />
 
             <Route
               exact
+              basename={this.basename}
               path="/todo"
               render={() => {
                 return isLoggedIn ? (
@@ -79,10 +83,11 @@ class App extends Component {
               }}
             />
 
-            <Route path="./about" component={About} />
+            <Route basename={this.basename} path="./about" component={About} />
 
             <Route
               exact
+              basename={this.basename}
               path="/login"
               render={() =>
                 isLoggedIn ? (
@@ -91,6 +96,7 @@ class App extends Component {
                   <Login
                     changeState={this.changeState}
                     userData={this.state.userData}
+                    basename={this.basename}
                   />
                 )
               }
@@ -98,6 +104,7 @@ class App extends Component {
 
             <Route
               exact
+              basename={this.basename}
               path="/"
               render={() =>
                 isLoggedIn ? <Redirect to="/todo" /> : <Redirect to="/login" />

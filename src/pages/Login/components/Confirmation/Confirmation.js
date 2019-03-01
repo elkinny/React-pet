@@ -4,8 +4,13 @@ import { Route } from 'react-router-dom';
 
 export default class Confirmation extends Component {
   navigateToToDo = history => {
-    this.props.changeState({ userData: this.props.values });
-    history.push('/todo');
+    const { values } = this.props;
+    values.state = 1;
+    this.props.changeState({ userData: values });
+
+    if (values.username.length > 3 || values.password.length > 3)
+      history.push('/todo');
+    else alert('Too small username or password');
   };
 
   render() {
@@ -46,6 +51,7 @@ export default class Confirmation extends Component {
         <div className="buttons-block">
           <button onClick={this.props.prevStep}>Back</button>
           <Route
+            basename={this.props.basename}
             render={({ history }) => (
               <button
                 onClick={() => {
