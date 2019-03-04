@@ -1,0 +1,19 @@
+{
+  "toDo": [
+    {
+      "id": 1,
+      "title": "GO for a shopping",
+      "completed": false
+    },
+    {
+      "id": 2,
+      "title": "Call mom",
+      "completed": false
+    },
+    {
+      "id": 3,
+      "title": "Talk with Boss about project",
+      "completed": false
+    }
+  ]
+}
