@@ -1,4 +1,4 @@
-<h1 align="center"><a href="http://elkinny.github.io/react-pet">Try it now</a></h1>
+<h1 align="center"><a href="https://elkinny.github.io/React-to-do">Try it now</a></h1>
 
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
