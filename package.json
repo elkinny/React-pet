@@ -2,7 +2,7 @@
   "name": "react-todo-app",
   "version": "0.1.0",
   "private": false,
-  "homepage": "http://elkinny.github.io/react-pet",
+  "homepage": "http://elkinny.github.io/React-to-do",
   "dependencies": {
     "axios": "^0.18.0",
     "react": "^16.8.3",

@@ -24,9 +24,9 @@ class App extends Component {
     },
   };
 
-  DbLink = 'https://my-json-server.typicode.com/elkinny/db/toDo';
+  DbLink = 'https://my-json-server.typicode.com/elkinny/React-to-do/toDo';
 
-  basename = process.env.NODE_ENV === 'development' ? '' : '/react-pet';
+  basename = process.env.NODE_ENV === 'development' ? '' : '/React-to-do';
 
   componentDidMount() {
     axios.get(this.DbLink).then(res =>
