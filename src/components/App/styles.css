@@ -1,3 +1,16 @@
+.App {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.container {
+  width: 500px;
+  margin: 40px 20px 10px;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -26,3 +39,4 @@ code {
 
 @import url('https://fonts.googleapis.com/css?family=Roboto:300');
 @import url('https://fonts.googleapis.com/css?family=Roboto+Condensed:300');
+

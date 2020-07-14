@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import AddToDo from './components/AddToDo/AddToDo';
-import ToDoList from './components/ToDoList/ToDoList';
 import axios from 'axios';
+
+import { AddToDo, ToDoList } from 'components/ToDo';
 
 export class ToDo extends Component {
   _generateId = () =>
@@ -21,7 +21,7 @@ export class ToDo extends Component {
 
   deleteToDo = id => {
     axios
-      .delete(`${this.props.DbLink}/${id}`)
+      .delete(`${process.env.REACT_APP_DB_LINK}/${id}`)
       .then(res =>
         this.props.changeState({
           toDoItems: this.props.toDoItems.filter(
@@ -29,13 +29,11 @@ export class ToDo extends Component {
           ),
         })
       )
-      .catch(err =>
-        this.props.changeState({
-          toDoItems: this.props.toDoItems.filter(
-            toDoItem => toDoItem.id !== id
-          ),
-        })
-      );
+      .catch(() => this.props.changeState({
+        toDoItems: this.props.toDoItems.filter(
+          toDoItem => toDoItem.id !== id
+        ),
+      }));
   };
 
   addToDo = title => {
@@ -44,9 +42,12 @@ export class ToDo extends Component {
       title,
       completed: false,
     };
-    axios.post(this.props.DbLink, newToDo).then(res => {
-      this.props.changeState({
-        toDoItems: [...this.props.toDoItems, res.data],
+
+    axios
+      .post(process.env.REACT_APP_DB_LINK, newToDo)
+      .then(res => {
+        this.props.changeState({
+          toDoItems: [...this.props.toDoItems, res.data],
       });
     });
   };

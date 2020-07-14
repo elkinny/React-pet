@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import './PersonalDetails.css';
 
 export default class PersonalDetails extends Component {
   render() {

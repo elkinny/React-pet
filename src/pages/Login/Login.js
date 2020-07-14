@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import LoginDetails from './components/LoginDetails/LoginDetails';
-import './Login.css';
-import PersonalDetails from './components/PersonalDetails/PersonalDetails';
-import Confirmation from './components/Confirmation/Confirmation';
+
+import { LoginDetails, PersonalDetails, Confirmation } from 'components/Login';
+import './styles.css';
 
 export default class Login extends Component {
   state = this.props.userData;

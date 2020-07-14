@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import './ToDoList.css';
-import ToDoItem from '../ToDoItem/ToDoItem';
 import PropTypes from 'prop-types';
+
+import './styles.css';
+import ToDoItem from '../ToDoItem/ToDoItem';
 
 class ToDoList extends Component {
   createList() {

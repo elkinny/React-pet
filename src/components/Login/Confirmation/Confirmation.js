@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import './Confirmation.css';
 import { Route } from 'react-router-dom';
+
+import './styles.css';
 
 export default class Confirmation extends Component {
   navigateToToDo = history => {
