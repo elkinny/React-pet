@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import './Header.css';
-import { Link } from 'react-router-dom';
-import { Route } from 'react-router-dom';
+import { Link, Route } from 'react-router-dom';
+
+import './styles.css';
 
 export default class Header extends Component {
   logout = history => {

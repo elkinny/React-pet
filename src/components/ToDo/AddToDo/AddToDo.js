@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import './AddToDo.css';
 import PropTypes from 'prop-types';
+
+import './styles.css';
 
 export class AddToDo extends Component {
   state = {
