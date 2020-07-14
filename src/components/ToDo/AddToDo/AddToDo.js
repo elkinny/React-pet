@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import './styles.css';
+import './styles.scss';
 
 const AddToDo = ({ postToDo }) => {
   const [title, setTitle] = useState('');
@@ -18,15 +18,16 @@ const AddToDo = ({ postToDo }) => {
   };
 
   return (
-    <form onSubmit={addToDo} className="addTodo">
+    <form onSubmit={addToDo} className="add-todo">
       <input
         type="text"
         name="title"
         placeholder="Add to do item ..."
         value={title}
         onChange={handleInput}
+        className="add-todo__input"
       />
-      <input type="submit" value="Add" />
+      <input type="submit" value="Add" className="add-todo__submit"/>
     </form>
   );
 }
