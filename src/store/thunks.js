@@ -28,27 +28,15 @@ const postToDo = title => dispatch => {
     .then(res => dispatch(postToDoCreator(res.data)));
 };
 
-const deleteToDo = id => (dispatch, getState) => {
-  const {toDoItems} = getState();
-  const newToDos = toDoItems.filter(
-    toDoItem => toDoItem.id !== id
-  );
-
+const deleteToDo = id => dispatch => {
   axios
     .delete(`${url}/${id}`)
-    .then(() => dispatch(deleteToDoCreator(newToDos)))
-    .catch(() => dispatch(deleteToDoCreator(newToDos)));
+    .then(() => dispatch(deleteToDoCreator(id)))
+    .catch(() => dispatch(deleteToDoCreator(id)));
 };
 
-const toggleToDo = id => (dispatch, getState) => {
-  const {toDoItems} = getState();
-  const newToDoItems = toDoItems.map(toDoItem => {
-    if (toDoItem.id === id) toDoItem.completed = !toDoItem.completed;
-    return toDoItem;
-  });
-
-  dispatch(toggleToDoCreator(newToDoItems));
+const toggleToDo = id => dispatch => {
+  dispatch(toggleToDoCreator(id));
 };
-
 
 export { getTodos, postToDo, deleteToDo, toggleToDo }

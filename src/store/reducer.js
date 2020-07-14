@@ -5,6 +5,8 @@ const initialState = {
 };
 
 export default (state = initialState, action) => {
+  const { toDoItems } = state;
+
   switch (action.type) {
     case POST_TODO:
       return {
@@ -12,11 +14,27 @@ export default (state = initialState, action) => {
         toDoItems: [...state.toDoItems, action.payload],
       };
     case GET_TODOS:
-    case DELETE_TODO:
-    case TOGGLE_TODO:
       return {
         ...state,
         toDoItems: action.payload,
+      };
+    case DELETE_TODO:
+      const newToDos = toDoItems.filter(
+        toDoItem => toDoItem.id !== action.payload
+      );
+      return {
+        ...state,
+        toDoItems: newToDos,
+      };
+    case TOGGLE_TODO:
+      const newToDoItems = toDoItems.map(toDoItem => {
+        if (toDoItem.id === action.payload) toDoItem.completed = !toDoItem.completed;
+        return toDoItem;
+      });
+    
+      return {
+        ...state,
+        toDoItems: newToDoItems,
       };
     default:
       return state;
