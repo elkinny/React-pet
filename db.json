@@ -2,8 +2,8 @@
   "toDo": [
     {
       "id": 1,
-      "title": "GO for a shopping",
-      "completed": false
+      "title": "Go shopping",
+      "completed": true
     },
     {
       "id": 2,

@@ -1,16 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import './styles.css';
+import './styles.scss';
 
 const Header = () => (
-  <header>
-    <h1>ToDo List</h1>
-    <nav>
-      <Link to="/" className="link">
+  <header className="header">
+    <h1 className="header__title">ToDo List</h1>
+    <nav className="header__nav">
+      <Link to="/" className="header__nav-item">
         Home
       </Link>
-      <Link to="/about" className="link">
+      <Link to="/about" className="header__nav-item">
         About
       </Link>
     </nav>

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import './styles.css';
+import './styles.scss';
 
 const ToDoItem = ({toDoItem, toggleToDo, deleteToDo}) => {
   const { id, title, completed } = toDoItem;
@@ -14,17 +14,20 @@ const ToDoItem = ({toDoItem, toggleToDo, deleteToDo}) => {
   };
 
   return (
-    <li>
-      <label htmlFor={id}>
+    <li className="todo-item__wrapper">
+      <label htmlFor={id} className="todo-item">
         <input
           type="checkbox"
           id={id}
           checked={completed}
           onChange={toggleItem}
+          className="todo-item__checkbox"
         />
         <i />
-        <span>{title}</span>
-        <button onClick={deleteItem}>–</button>
+        <span className="todo-item__title">{title}</span>
+        <button onClick={deleteItem} className="todo-item__remove-btn">
+          <span className="todo-item__remove-btn-text">–</span>
+        </button>
       </label>
     </li>
   );
