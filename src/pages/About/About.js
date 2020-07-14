@@ -1,10 +1,10 @@
 import React from 'react';
 
-export default function About() {
-  return (
-    <React.Fragment>
+const About = () => (
+    <>
       <h1>About</h1>
       <p>Lorem ipsum</p>
-    </React.Fragment>
+    </>
   );
-}
+
+export default About;

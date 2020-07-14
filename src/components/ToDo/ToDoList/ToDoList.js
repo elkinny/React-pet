@@ -1,32 +1,22 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React from 'react';
 
 import './styles.css';
 import ToDoItem from '../ToDoItem/ToDoItem';
 
-class ToDoList extends Component {
-  createList() {
-    return this.props.toDoItems.map(toDoItem => (
+const ToDoList = ({toDoItems, toggleToDo, deleteToDo}) => {
+  const createList = () => {
+    return toDoItems.map(toDoItem => (
       <ToDoItem
         id={toDoItem.id}
         key={toDoItem.id}
         toDoItem={toDoItem}
-        toggleToDo={this.props.toggleToDo}
-        deleteToDo={this.props.deleteToDo}
+        toggleToDo={toggleToDo}
+        deleteToDo={deleteToDo}
       />
     ));
   }
 
-  render() {
-    return <ul className="to-do__list">{this.createList()}</ul>;
-  }
+  return <ul className="to-do__list">{createList()}</ul>;
 }
-
-// PropTypes
-ToDoList.propTypes = {
-  toDoItems: PropTypes.array.isRequired,
-  toggleToDo: PropTypes.func.isRequired,
-  deleteToDo: PropTypes.func.isRequired,
-};
 
 export default ToDoList;

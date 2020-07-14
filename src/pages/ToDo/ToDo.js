@@ -2,35 +2,46 @@ import React, { Component } from 'react';
 import axios from 'axios';
 
 import { AddToDo, ToDoList } from 'components/ToDo';
+import { generateId } from 'utils';
 
 export class ToDo extends Component {
-  _generateId = () =>
-    '_' +
-    Math.random()
-      .toString(36)
-      .substr(2, 9);
+  state = {
+    toDoItems: [],
+  };
+
+  componentDidMount() {
+    axios.get(process.env.REACT_APP_DB_LINK).then(res =>
+      this.setState({
+        toDoItems: res.data,
+      })
+    );
+  }
+
+  changeState = newState => {
+    this.setState(newState);
+  };
 
   toggleToDo = id => {
-    const toDoItems = this.props.toDoItems.map(toDoItem => {
+    const toDoItems = this.state.toDoItems.map(toDoItem => {
       if (toDoItem.id === id) toDoItem.completed = !toDoItem.completed;
       return toDoItem;
     });
 
-    this.props.changeState({ toDoItems });
+    this.changeState({ toDoItems });
   };
 
   deleteToDo = id => {
     axios
       .delete(`${process.env.REACT_APP_DB_LINK}/${id}`)
       .then(res =>
-        this.props.changeState({
-          toDoItems: this.props.toDoItems.filter(
+        this.changeState({
+          toDoItems: this.state.toDoItems.filter(
             toDoItem => toDoItem.id !== id
           ),
         })
       )
-      .catch(() => this.props.changeState({
-        toDoItems: this.props.toDoItems.filter(
+      .catch(() => this.changeState({
+        toDoItems: this.state.toDoItems.filter(
           toDoItem => toDoItem.id !== id
         ),
       }));
@@ -38,7 +49,7 @@ export class ToDo extends Component {
 
   addToDo = title => {
     const newToDo = {
-      id: this._generateId(),
+      id: generateId(),
       title,
       completed: false,
     };
@@ -46,22 +57,22 @@ export class ToDo extends Component {
     axios
       .post(process.env.REACT_APP_DB_LINK, newToDo)
       .then(res => {
-        this.props.changeState({
-          toDoItems: [...this.props.toDoItems, res.data],
+        this.changeState({
+          toDoItems: [...this.state.toDoItems, res.data],
       });
     });
   };
 
   render() {
     return (
-      <React.Fragment>
+      <>
         <AddToDo addToDo={this.addToDo} />
         <ToDoList
-          toDoItems={this.props.toDoItems}
+          toDoItems={this.state.toDoItems}
           toggleToDo={this.toggleToDo}
           deleteToDo={this.deleteToDo}
         />
-      </React.Fragment>
+      </>
     );
   }
 }
