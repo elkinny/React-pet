@@ -1,42 +1,34 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 
 import './styles.css';
 
-export class AddToDo extends Component {
-  state = {
-    title: '',
+const AddToDo = ({ postToDo }) => {
+  const [title, setTitle] = useState('');
+
+  const handleInput = e => {
+    setTitle(e.target.value);
   };
 
-  handleInput = e => {
-    this.setState({
-      [e.target.name]: e.target.value,
-    });
-  };
-
-  addToDo = e => {
+  const addToDo = e => {
     e.preventDefault();
-    if (this.state.title.length > 3) {
-      this.props.addToDo(this.state.title);
-      this.setState({
-        title: '',
-      });
+    if (title.length > 3) {
+      postToDo(title);
+      setTitle('');
     }
   };
 
-  render() {
-    return (
-      <form onSubmit={this.addToDo} className="addTodo">
-        <input
-          type="text"
-          name="title"
-          placeholder="Add to do item ..."
-          value={this.state.title}
-          onChange={this.handleInput}
-        />
-        <input type="submit" value="Add" />
-      </form>
-    );
-  }
+  return (
+    <form onSubmit={addToDo} className="addTodo">
+      <input
+        type="text"
+        name="title"
+        placeholder="Add to do item ..."
+        value={title}
+        onChange={handleInput}
+      />
+      <input type="submit" value="Add" />
+    </form>
+  );
 }
 
 export default AddToDo;

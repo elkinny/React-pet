@@ -1,53 +1,39 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 import { AddToDo, ToDoList } from 'components/ToDo';
 import { generateId } from 'utils';
 
-export class ToDo extends Component {
-  state = {
-    toDoItems: [],
-  };
+const ToDo = () => {
+  const [toDoItems, setToDoItems] = useState([]);
 
-  componentDidMount() {
+  useEffect(() => {
     axios.get(process.env.REACT_APP_DB_LINK).then(res =>
-      this.setState({
-        toDoItems: res.data,
-      })
-    );
-  }
+      setToDoItems(res.data)
+    )
+  }, []);
 
-  changeState = newState => {
-    this.setState(newState);
-  };
-
-  toggleToDo = id => {
-    const toDoItems = this.state.toDoItems.map(toDoItem => {
+  const toggleToDo = id => {
+    const newToDoItems = toDoItems.map(toDoItem => {
       if (toDoItem.id === id) toDoItem.completed = !toDoItem.completed;
       return toDoItem;
     });
 
-    this.changeState({ toDoItems });
+    setToDoItems(newToDoItems);
   };
 
-  deleteToDo = id => {
+  const deleteToDo = id => {
+    const newToDos = toDoItems.filter(
+      toDoItem => toDoItem.id !== id
+    );
+
     axios
       .delete(`${process.env.REACT_APP_DB_LINK}/${id}`)
-      .then(res =>
-        this.changeState({
-          toDoItems: this.state.toDoItems.filter(
-            toDoItem => toDoItem.id !== id
-          ),
-        })
-      )
-      .catch(() => this.changeState({
-        toDoItems: this.state.toDoItems.filter(
-          toDoItem => toDoItem.id !== id
-        ),
-      }));
+      .then(() => setToDoItems(newToDos))
+      .catch(() => setToDoItems(newToDos));
   };
 
-  addToDo = title => {
+  const postToDo = title => {
     const newToDo = {
       id: generateId(),
       title,
@@ -57,24 +43,20 @@ export class ToDo extends Component {
     axios
       .post(process.env.REACT_APP_DB_LINK, newToDo)
       .then(res => {
-        this.changeState({
-          toDoItems: [...this.state.toDoItems, res.data],
-      });
+        setToDoItems([...toDoItems, res.data]);
     });
   };
 
-  render() {
-    return (
-      <>
-        <AddToDo addToDo={this.addToDo} />
-        <ToDoList
-          toDoItems={this.state.toDoItems}
-          toggleToDo={this.toggleToDo}
-          deleteToDo={this.deleteToDo}
-        />
-      </>
-    );
-  }
+  return (
+    <>
+      <AddToDo postToDo={postToDo} />
+      <ToDoList
+        toDoItems={toDoItems}
+        toggleToDo={toggleToDo}
+        deleteToDo={deleteToDo}
+      />
+    </>
+  );
 }
 
 export default ToDo;
