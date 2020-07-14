@@ -1,9 +1,14 @@
-import React from 'react';
+import React, {useEffect} from 'react';
+import { connect } from 'react-redux'
 
-import './styles.css';
+import './styles.scss';
 import ToDoItem from '../ToDoItem/ToDoItem';
+import { deleteToDo, toggleToDo, getTodos } from 'store/thunks';
+import { toDoItemsSelector } from 'store/selectors'
 
-const ToDoList = ({toDoItems, toggleToDo, deleteToDo}) => {
+const ToDoList = ({toDoItems, getTodos, toggleToDo, deleteToDo}) => {
+  useEffect(() => getTodos(), [getTodos]);
+
   const createList = () => {
     return toDoItems.map(toDoItem => (
       <ToDoItem
@@ -16,7 +21,13 @@ const ToDoList = ({toDoItems, toggleToDo, deleteToDo}) => {
     ));
   }
 
-  return <ul className="to-do__list">{createList()}</ul>;
+  return <ul className="todo__list">{createList()}</ul>;
 }
 
-export default ToDoList;
+const mapStateToProps = state => ({
+  toDoItems: toDoItemsSelector(state),
+});
+const mapDispatchToProps = { deleteToDo, toggleToDo, getTodos };
+
+export default connect(mapStateToProps, mapDispatchToProps)(ToDoList);
+

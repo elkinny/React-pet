@@ -1,33 +1,15 @@
-import React, { useEffect } from 'react';
-import { connect } from 'react-redux'
+import React from 'react';
 
 import { AddToDo, ToDoList } from 'components/ToDo';
-import { getTodos, postToDo, deleteToDo, toggleToDo } from 'store/thunks';
 
-const ToDo = ({
-  toDoItems = [],
-  getTodos,
-  postToDo,
-  deleteToDo,
-  toggleToDo
-}) => {
-  useEffect(() => getTodos(), [getTodos]);
+const ToDo = () => {
 
   return (
     <>
-      <AddToDo postToDo={postToDo} />
-      <ToDoList
-        toDoItems={toDoItems}
-        toggleToDo={toggleToDo}
-        deleteToDo={deleteToDo}
-      />
+      <AddToDo />
+      <ToDoList />
     </>
   );
 }
 
-const mapDispatchToProps = { getTodos, postToDo, deleteToDo, toggleToDo };
-const mapStateToProps = state => ({
-  toDoItems: state.toDoItems,
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(ToDo);
+export default ToDo;

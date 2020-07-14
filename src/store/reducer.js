@@ -1,4 +1,4 @@
-import { GET_TODOS, POST_TODO, DELETE_TODO, TOGGLE_TODO } from './actions';
+import { GET_TODOS, POST_TODO, DELETE_TODO, TOGGLE_TODO } from './actionsTypes';
 
 const initialState = {
   toDoItems: [],

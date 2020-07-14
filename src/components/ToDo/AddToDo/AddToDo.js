@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
+import { connect } from 'react-redux'
 
+import { postToDo } from 'store/thunks';
 import './styles.scss';
 
 const AddToDo = ({ postToDo }) => {
@@ -32,4 +34,6 @@ const AddToDo = ({ postToDo }) => {
   );
 }
 
-export default AddToDo;
+const mapDispatchToProps = { postToDo };
+
+export default connect(null, mapDispatchToProps)(AddToDo);
