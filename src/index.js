@@ -5,7 +5,7 @@ import { Provider } from 'react-redux'
 import App from 'components/App';
 import createStore from './store'
 
-const store = createStore();
+const store = createStore({ toDoItems: [] });
 
 ReactDOM.render(
   <Provider store={store}>
