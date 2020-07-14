@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux'
 
 import { AddToDo, ToDoList } from 'components/ToDo';
-import { getTodos, postToDo, deleteToDo, toggleToDo } from 'store/actionCreators';
+import { getTodos, postToDo, deleteToDo, toggleToDo } from 'store/thunks';
 
 const ToDo = ({
   toDoItems = [],
